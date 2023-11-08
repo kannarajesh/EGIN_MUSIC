@@ -1,0 +1,1225 @@
+let now_playing = document.querySelector(".now-playing");
+let track_art = document.querySelector(".track-art");
+let track_name = document.querySelector(".track-name");
+let track_artist = document.querySelector(".track-artist");
+
+let playpause_btn = document.querySelector(".playpause-track");
+let next_btn = document.querySelector(".next-track");
+let prev_btn = document.querySelector(".prev-track");
+
+let seek_slider = document.querySelector(".seek_slider");
+let volume_slider = document.querySelector(".volume_slider");
+let curr_time = document.querySelector(".current-time");
+let total_duration = document.querySelector(".total-duration");
+
+let track_index = 0;
+let isPlaying = false;
+let updateTimer;
+
+// Create new audio element
+let curr_track = document.createElement('audio');
+
+// Define the tracks that have to be played
+// Construct the URL using the requestScheme and requestHost variables
+var url1 = requestScheme + '://' + requestHost + '/MUSIC/play_list?directory=/Music';
+// Use the URL as needed
+console.log(url1);
+
+//let url = 'http://192.168.1.6:8000/MUSIC/play_list';
+
+//fetch(url)
+//.then(res => res.json())
+//.then(out =>
+//  console.log('Checkout this JSON! ', out))
+//.catch(err => { throw err });
+let myVariable;
+
+let track_list = [
+  {
+    name: "Muruga",
+    artist: "001",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Azhagendra_Sollukku_-_Raag.Fm.mp3"
+  },
+{
+    name: "001_Uriyadi_Bgm_Theme.mp3",
+    artist: "001_Uriyadi_Bgm_Theme.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/001_Uriyadi%20Bgm%20Theme.mp3"
+  },
+
+{
+    name: "08_Poo_Nee_Poo.mp3",
+    artist: "08_Poo_Nee_Poo.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/08%20Poo%20Nee%20Poo.mp3"
+  },
+
+{
+    name: "08_Poo_Nee_Poo_1.mp3",
+    artist: "08_Poo_Nee_Poo_1.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/08%20Poo%20Nee%20Poo_1.mp3"
+  },
+
+{
+    name: "1._Nijamellam_Maranthupochu.mp3",
+    artist: "1._Nijamellam_Maranthupochu.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/1.%20Nijamellam%20Maranthupochu.mp3"
+  },
+
+{
+    name: "2._Boomi_Enna_Suthudhe.mp3",
+    artist: "2._Boomi_Enna_Suthudhe.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/2.%20Boomi%20Enna%20Suthudhe.mp3"
+  },
+
+{
+    name: "3._Ethir_Neechal.mp3",
+    artist: "3._Ethir_Neechal.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/3.%20Ethir%20Neechal.mp3"
+  },
+
+{
+    name: "4._Velicha_Poove.mp3",
+    artist: "4._Velicha_Poove.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/4.%20Velicha%20Poove.mp3"
+  },
+
+{
+    name: "5._Un_Paarvayil.mp3",
+    artist: "5._Un_Paarvayil.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/5.%20Un%20Paarvayil.mp3"
+  },
+
+{
+    name: "6._Local_Boys.mp3",
+    artist: "6._Local_Boys.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/6.%20Local%20Boys.mp3"
+  },
+
+{
+    name: "Aaha_Kalyanam-Masstamilan.In.mp3",
+    artist: "Aaha_Kalyanam-Masstamilan.In.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Aaha%20Kalyanam-Masstamilan.In.mp3"
+  },
+
+{
+    name: "Aala_Ola-Masstamilan.In.mp3",
+    artist: "Aala_Ola-Masstamilan.In.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Aala%20Ola-Masstamilan.In.mp3"
+  },
+
+{
+    name: "Adchi_Thooku_(Karaoke)-[Masstamilan.In].mp3",
+    artist: "Adchi_Thooku_(Karaoke)-[Masstamilan.In].mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Adchi%20Thooku%20(Karaoke)-[Masstamilan.In].mp3"
+  },
+
+{
+    name: "Adiye_Sakkarakatti_-_Masstamilan.In-.mp3",
+    artist: "Adiye_Sakkarakatti_-_Masstamilan.In-.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Adiye%20Sakkarakatti%20-%20Masstamilan.In-.mp3"
+  },
+
+{
+    name: "Ailasa_Ailasa.mp3",
+    artist: "Ailasa_Ailasa.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Ailasa%20Ailasa.mp3"
+  },
+
+{
+    name: "Amma_Amma….mp3",
+    artist: "Amma_Amma….mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Amma%20Amma….mp3"
+  },
+
+{
+    name: "Andha_Kanna_Paathaakaa-Masstamilan.In.mp3",
+    artist: "Andha_Kanna_Paathaakaa-Masstamilan.In.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Andha%20Kanna%20Paathaakaa-Masstamilan.In.mp3"
+  },
+
+{
+    name: "Anthaathi_--_Masstamilan.In-.mp3",
+    artist: "Anthaathi_--_Masstamilan.In-.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Anthaathi%20--%20Masstamilan.In-.mp3"
+  },
+
+{
+    name: "Azhagendra_Sollukku_-_Raag.Fm.mp3",
+    artist: "Azhagendra_Sollukku_-_Raag.Fm.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Azhagendra_Sollukku_-_Raag.Fm.mp3"
+  },
+
+{
+    name: "Beat_of_Master_(Instrumental)-Masstamilan.In.mp3",
+    artist: "Beat_of_Master_(Instrumental)-Masstamilan.In.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Beat%20of%20Master%20(Instrumental)-Masstamilan.In.mp3"
+  },
+
+{
+    name: "Bujji-Masstamilan.In.mp3",
+    artist: "Bujji-Masstamilan.In.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Bujji-Masstamilan.In.mp3"
+  },
+
+{
+    name: "Chancey_Illa_-_skm.mp3",
+    artist: "Chancey_Illa_-_skm.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Chancey%20Illa%20-%20skm.mp3"
+  },
+
+{
+    name: "Chennai_City_Gangsta.mp3",
+    artist: "Chennai_City_Gangsta.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Chennai%20City%20Gangsta.mp3"
+  },
+
+{
+    name: "Chumma_Kizhi-Masstamilan.in.mp3",
+    artist: "Chumma_Kizhi-Masstamilan.in.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Chumma%20Kizhi-Masstamilan.in.mp3"
+  },
+
+{
+    name: "Danga_Danga-[Masstamilan.In].mp3",
+    artist: "Danga_Danga-[Masstamilan.In].mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Danga%20Danga-[Masstamilan.In].mp3"
+  },
+
+{
+    name: "Darling_Dambakku.mp3",
+    artist: "Darling_Dambakku.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Darling_Dambakku.mp3"
+  },
+
+{
+    name: "Darling_Dambakku_Reprise.mp3",
+    artist: "Darling_Dambakku_Reprise.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Darling_Dambakku_Reprise.mp3"
+  },
+
+{
+    name: "Dippam_Dappam.mp3",
+    artist: "Dippam_Dappam.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Dippam_Dappam.mp3"
+  },
+
+{
+    name: "Dumm_Dumm-Masstamilan.In.mp3",
+    artist: "Dumm_Dumm-Masstamilan.In.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Dumm%20Dumm-Masstamilan.In.mp3"
+  },
+
+{
+    name: "En_Iniya_Thanimaye_-_Karaoke_-_Masstamilan.In.mp3",
+    artist: "En_Iniya_Thanimaye_-_Karaoke_-_Masstamilan.In.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/En%20Iniya%20Thanimaye%20-%20Karaoke%20-%20Masstamilan.In.mp3"
+  },
+
+{
+    name: "En_Iniya_Thanimaye_-_Masstamilan.In.mp3",
+    artist: "En_Iniya_Thanimaye_-_Masstamilan.In.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/En%20Iniya%20Thanimaye%20-%20Masstamilan.In.mp3"
+  },
+
+{
+    name: "Enakenna_Yaarum_Illaye_-_AAKKO_(2015)_Anirudh_-_www.TamilRockers.com.mp3",
+    artist: "Enakenna_Yaarum_Illaye_-_AAKKO_(2015)_Anirudh_-_www.TamilRockers.com.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Enakenna%20Yaarum%20Illaye%20-%20AAKKO%20(2015)%20Anirudh%20-%20www.TamilRockers.com.mp3"
+  },
+
+{
+    name: "Engadi_Porandha.mp3",
+    artist: "Engadi_Porandha.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Engadi%20Porandha.mp3"
+  },
+
+{
+    name: "Enna_Nadanthalum_-_Masstamilan.In-.mp3",
+    artist: "Enna_Nadanthalum_-_Masstamilan.In-.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Enna%20Nadanthalum%20-%20Masstamilan.In-.mp3"
+  },
+
+{
+    name: "Ey_Inga_Paaaru….mp3",
+    artist: "Ey_Inga_Paaaru….mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Ey%20Inga%20Paaaru….mp3"
+  },
+
+{
+    name: "Ghetto_Chase_[Masstamilan.In]-.mp3",
+    artist: "Ghetto_Chase_[Masstamilan.In]-.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Ghetto%20Chase%20[Masstamilan.In]-.mp3"
+  },
+
+{
+    name: "Harmonica_Sizzles_-_Masstamilan.In.mp3",
+    artist: "Harmonica_Sizzles_-_Masstamilan.In.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Harmonica%20Sizzles%20-%20Masstamilan.In.mp3"
+  },
+
+{
+    name: "Hey.mp3",
+    artist: "Hey.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Hey.mp3"
+  },
+
+{
+    name: "I'm_So_Cool.mp3",
+    artist: "I'm_So_Cool.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/I'm%20So%20Cool.mp3"
+  },
+
+{
+    name: "Idhu_Emosion_[Masstamilan.In]-.mp3",
+    artist: "Idhu_Emosion_[Masstamilan.In]-.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Idhu%20Emosion%20[Masstamilan.In]-.mp3"
+  },
+
+{
+    name: "Ilamai_Thirumbudhe-Masstamilan.In.mp3",
+    artist: "Ilamai_Thirumbudhe-Masstamilan.In.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Ilamai%20Thirumbudhe-Masstamilan.In.mp3"
+  },
+
+{
+    name: "Jigu-Jigu-Rail-MassTamilan.dev.mp3",
+    artist: "Jigu-Jigu-Rail-MassTamilan.dev.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Jigu-Jigu-Rail-MassTamilan.dev.mp3"
+  },
+
+{
+    name: "Jithu_Theme-Masstamilan.In.mp3",
+    artist: "Jithu_Theme-Masstamilan.In.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Jithu%20Theme-Masstamilan.In.mp3"
+  },
+
+{
+    name: "Kaaki_Sattai_Theme.mp3",
+    artist: "Kaaki_Sattai_Theme.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Kaaki%20Sattai%20Theme.mp3"
+  },
+
+{
+    name: "Kaaki_Sattai_Title.mp3",
+    artist: "Kaaki_Sattai_Title.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Kaaki%20Sattai%20Title.mp3"
+  },
+
+{
+    name: "Kaali_Theme-Masstamilan.In.mp3",
+    artist: "Kaali_Theme-Masstamilan.In.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Kaali%20Theme-Masstamilan.In.mp3"
+  },
+
+{
+    name: "Kaathalae_Kaathalae_(Duet)_--_Masstamilan.In-.mp3",
+    artist: "Kaathalae_Kaathalae_(Duet)_--_Masstamilan.In-.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Kaathalae%20Kaathalae%20(Duet)%20--%20Masstamilan.In-.mp3"
+  },
+
+{
+    name: "Kaathalae_Kaathalae_--_Masstamilan.In-.mp3",
+    artist: "Kaathalae_Kaathalae_--_Masstamilan.In-.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Kaathalae%20Kaathalae%20--%20Masstamilan.In-.mp3"
+  },
+
+{
+    name: "Kadhal_Kan_Kattudhe.mp3",
+    artist: "Kadhal_Kan_Kattudhe.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Kadhal%20Kan%20Kattudhe.mp3"
+  },
+
+{
+    name: "Kalarey_Kalarvasam-Masstamilan.In.mp3",
+    artist: "Kalarey_Kalarvasam-Masstamilan.In.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Kalarey%20Kalarvasam-Masstamilan.In.mp3"
+  },
+
+{
+    name: "Kanave_Kanave.mp3",
+    artist: "Kanave_Kanave.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Kanave%20Kanave.mp3"
+  },
+
+{
+    name: "Kannaana_Kanney_(Karaoke)-[Masstamilan.In].mp3",
+    artist: "Kannaana_Kanney_(Karaoke)-[Masstamilan.In].mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Kannaana%20Kanney%20(Karaoke)-[Masstamilan.In].mp3"
+  },
+
+{
+    name: "Kannaana_Kanney_Instrumental-[Masstamilan.In].mp3",
+    artist: "Kannaana_Kanney_Instrumental-[Masstamilan.In].mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Kannaana%20Kanney%20Instrumental-[Masstamilan.In].mp3"
+  },
+
+{
+    name: "Kannaana_Kanney-[Masstamilan.In].mp3",
+    artist: "Kannaana_Kanney-[Masstamilan.In].mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Kannaana%20Kanney-[Masstamilan.In].mp3"
+  },
+
+{
+    name: "Karuppu_Vellai_[Masstamilan.In]-.mp3",
+    artist: "Karuppu_Vellai_[Masstamilan.In]-.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Karuppu%20Vellai%20[Masstamilan.In]-.mp3"
+  },
+
+{
+    name: "Kattikida.mp3",
+    artist: "Kattikida.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Kattikida.mp3"
+  },
+
+{
+    name: "Kodi-Parakura-Kaalam-MassTamilan.dev.mp3",
+    artist: "Kodi-Parakura-Kaalam-MassTamilan.dev.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Kodi-Parakura-Kaalam-MassTamilan.dev.mp3"
+  },
+
+{
+    name: "Kutti_Story-Masstamilan.In.mp3",
+    artist: "Kutti_Story-Masstamilan.In.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Kutti%20Story-Masstamilan.In.mp3"
+  },
+
+{
+    name: "London_Street-Masstamilan.In.mp3",
+    artist: "London_Street-Masstamilan.In.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/London%20Street-Masstamilan.In.mp3"
+  },
+
+{
+    name: "Maanja.mp3",
+    artist: "Maanja.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Maanja.mp3"
+  },
+
+{
+    name: "Maattikkichey_Maattikkichey_-_Masstamilan.In-.mp3",
+    artist: "Maattikkichey_Maattikkichey_-_Masstamilan.In-.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Maattikkichey%20Maattikkichey%20-%20Masstamilan.In-.mp3"
+  },
+
+{
+    name: "Machi_Engalukku_Ellam_-_Masstamilan.In-.mp3",
+    artist: "Machi_Engalukku_Ellam_-_Masstamilan.In-.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Machi%20Engalukku%20Ellam%20-%20Masstamilan.In-.mp3"
+  },
+
+{
+    name: "Macho_[Masstamilan.In]-.mp3",
+    artist: "Macho_[Masstamilan.In]-.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Macho%20[Masstamilan.In]-.mp3"
+  },
+
+{
+    name: "Madura_Petta-Masstamilan.In.mp3",
+    artist: "Madura_Petta-Masstamilan.In.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Madura%20Petta-Masstamilan.In.mp3"
+  },
+
+{
+    name: "Manna-Maamanna-MassTamilan.dev.mp3",
+    artist: "Manna-Maamanna-MassTamilan.dev.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Manna-Maamanna-MassTamilan.dev.mp3"
+  },
+
+{
+    name: "Marana_Mass-Masstamilan.In.mp3",
+    artist: "Marana_Mass-Masstamilan.In.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Marana%20Mass-Masstamilan.In.mp3"
+  },
+
+{
+    name: "Marandaaye_(Unplugged_Version)_-_Masstamilan.In.mp3",
+    artist: "Marandaaye_(Unplugged_Version)_-_Masstamilan.In.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Marandaaye%20(Unplugged%20Version)%20-%20Masstamilan.In.mp3"
+  },
+
+{
+    name: "Marandaaye_-_Karaoke_-_Masstamilan.In.mp3",
+    artist: "Marandaaye_-_Karaoke_-_Masstamilan.In.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Marandaaye%20-%20Karaoke%20-%20Masstamilan.In.mp3"
+  },
+
+{
+    name: "Marandhaye_-Masstamilan.In.mp3",
+    artist: "Marandhaye_-Masstamilan.In.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Marandhaye%20-Masstamilan.In.mp3"
+  },
+
+{
+    name: "Meesaya_Murukku_-_Masstamilan.In-.mp3",
+    artist: "Meesaya_Murukku_-_Masstamilan.In-.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Meesaya%20Murukku%20-%20Masstamilan.In-.mp3"
+  },
+
+{
+    name: "Mersal_Arasan_[Masstamilan.In]-.mp3",
+    artist: "Mersal_Arasan_[Masstamilan.In]-.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Mersal%20Arasan%20[Masstamilan.In]-.mp3"
+  },
+
+{
+    name: "Mersalaayitten_(Remix).mp3",
+    artist: "Mersalaayitten_(Remix).mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Mersalaayitten%20(Remix).mp3"
+  },
+
+{
+    name: "Mersalaayitten.mp3",
+    artist: "Mersalaayitten.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Mersalaayitten.mp3"
+  },
+
+{
+    name: "Naan_Dhaan_Da-Masstamilan.In.mp3",
+    artist: "Naan_Dhaan_Da-Masstamilan.In.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Naan%20Dhaan%20Da-Masstamilan.In.mp3"
+  },
+
+{
+    name: "Naan_Pizhai.mp3",
+    artist: "Naan_Pizhai.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Naan_Pizhai.mp3"
+  },
+
+{
+    name: "Namma-Satham-MassTamilan.dev.mp3",
+    artist: "Namma-Satham-MassTamilan.dev.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Namma-Satham-MassTamilan.dev.mp3"
+  },
+
+{
+    name: "Nanbiye_-_Karaoke_-_Masstamilan.In.mp3",
+    artist: "Nanbiye_-_Karaoke_-_Masstamilan.In.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Nanbiye%20-%20Karaoke%20-%20Masstamilan.In.mp3"
+  },
+
+{
+    name: "Nanbiye_-_Masstamilan.In.mp3",
+    artist: "Nanbiye_-_Masstamilan.In.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Nanbiye%20-%20Masstamilan.In.mp3"
+  },
+
+{
+    name: "Nee-Singam-Dhan-MassTamilan.dev.mp3",
+    artist: "Nee-Singam-Dhan-MassTamilan.dev.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Nee-Singam-Dhan-MassTamilan.dev.mp3"
+  },
+
+{
+    name: "Neethanae_[Masstamilan.In]-.mp3",
+    artist: "Neethanae_[Masstamilan.In]-.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Neethanae%20[Masstamilan.In]-.mp3"
+  },
+
+{
+    name: "Nenjame-Nenjame-MassTamilan.dev.mp3",
+    artist: "Nenjame-Nenjame-MassTamilan.dev.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Nenjame-Nenjame-MassTamilan.dev.mp3"
+  },
+
+{
+    name: "Nethu-Masstamilan.In.mp3",
+    artist: "Nethu-Masstamilan.In.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Nethu-Masstamilan.In.mp3"
+  },
+
+{
+    name: "Ninaivirukka-MassTamilan.dev.mp3",
+    artist: "Ninaivirukka-MassTamilan.dev.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Ninaivirukka-MassTamilan.dev.mp3"
+  },
+
+{
+    name: "Oh_Penne_-_International_Version.mp3",
+    artist: "Oh_Penne_-_International_Version.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Oh%20Penne%20-%20International%20Version.mp3"
+  },
+
+{
+    name: "Oh_Penne.mp3",
+    artist: "Oh_Penne.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Oh%20Penne.mp3"
+  },
+
+{
+    name: "Open_the_Tasmac.mp3",
+    artist: "Open_the_Tasmac.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Open_the_Tasmac.mp3"
+  },
+
+{
+    name: "Oru_Katha_Sollatta_[Masstamilan.In]-.mp3",
+    artist: "Oru_Katha_Sollatta_[Masstamilan.In]-.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Oru%20Katha%20Sollatta%20[Masstamilan.In]-.mp3"
+  },
+
+{
+    name: "Osaka_Osaka.mp3",
+    artist: "Osaka_Osaka.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Osaka%20Osaka.mp3"
+  },
+
+{
+    name: "Osarattum-Pathu-Thala-MassTamilan.dev.mp3",
+    artist: "Osarattum-Pathu-Thala-MassTamilan.dev.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Osarattum-Pathu-Thala-MassTamilan.dev.mp3"
+  },
+
+{
+    name: "Pathala_Pathala-Masstamilan.in.mp3",
+    artist: "Pathala_Pathala-Masstamilan.in.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Pathala%20Pathala-Masstamilan.in.mp3"
+  },
+
+{
+    name: "Petta_Paraak-Masstamilan.In.mp3",
+    artist: "Petta_Paraak-Masstamilan.In.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Petta%20Paraak-Masstamilan.In.mp3"
+  },
+
+{
+    name: "Petta_Theme-Masstamilan.In.mp3",
+    artist: "Petta_Theme-Masstamilan.In.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Petta%20Theme-Masstamilan.In.mp3"
+  },
+
+{
+    name: "Photographic_Memory_-_Masstamilan.In.mp3",
+    artist: "Photographic_Memory_-_Masstamilan.In.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Photographic%20Memory%20-%20Masstamilan.In.mp3"
+  },
+
+{
+    name: "Po_Indru_Neeyaga….mp3",
+    artist: "Po_Indru_Neeyaga….mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Po%20Indru%20Neeyaga….mp3"
+  },
+
+{
+    name: "Pogatha_Yennavittu_[Masstamilan.In]-.mp3",
+    artist: "Pogatha_Yennavittu_[Masstamilan.In]-.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Pogatha%20Yennavittu%20[Masstamilan.In]-.mp3"
+  },
+
+{
+    name: "Polakatum_Para_Para-Masstamilan.In.mp3",
+    artist: "Polakatum_Para_Para-Masstamilan.In.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Polakatum%20Para%20Para-Masstamilan.In.mp3"
+  },
+
+{
+    name: "Pona_Pogattum-Masstamilan.In.mp3",
+    artist: "Pona_Pogattum-Masstamilan.In.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Pona%20Pogattum-Masstamilan.In.mp3"
+  },
+
+{
+    name: "Quit_Pannuda-Masstamilan.In.mp3",
+    artist: "Quit_Pannuda-Masstamilan.In.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Quit%20Pannuda-Masstamilan.In.mp3"
+  },
+
+{
+    name: "Raasa-Kannu-MassTamilan.dev.mp3",
+    artist: "Raasa-Kannu-MassTamilan.dev.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Raasa-Kannu-MassTamilan.dev.mp3"
+  },
+
+{
+    name: "Raawadi-MassTamilan.dev.mp3",
+    artist: "Raawadi-MassTamilan.dev.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Raawadi-MassTamilan.dev.mp3"
+  },
+
+{
+    name: "Rakita_Rakita_Rakita-Masstamilan.In.mp3",
+    artist: "Rakita_Rakita_Rakita-Masstamilan.In.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Rakita%20Rakita%20Rakita-Masstamilan.In.mp3"
+  },
+
+{
+    name: "Ready_Steady_Teddy_-_Masstamilan.In.mp3",
+    artist: "Ready_Steady_Teddy_-_Masstamilan.In.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Ready%20Steady%20Teddy%20-%20Masstamilan.In.mp3"
+  },
+
+{
+    name: "Rendu_Kaadhal.mp3",
+    artist: "Rendu_Kaadhal.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Rendu_Kaadhal.mp3"
+  },
+
+{
+    name: "Rise_Up_Theme-[Masstamilan.In].mp3",
+    artist: "Rise_Up_Theme-[Masstamilan.In].mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Rise%20Up%20Theme-[Masstamilan.In].mp3"
+  },
+
+{
+    name: "Royapuram_Peter.mp3",
+    artist: "Royapuram_Peter.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Royapuram_Peter.mp3"
+  },
+
+{
+    name: "Sachin_Anthem_-_-_www.TamilRockers.com.mp3",
+    artist: "Sachin_Anthem_-_-_www.TamilRockers.com.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Sachin%20Anthem%20-%20-%20www.TamilRockers.com.mp3"
+  },
+
+{
+    name: "Saitji_Saitji_-_Masstamilan.In-.mp3",
+    artist: "Saitji_Saitji_-_Masstamilan.In-.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Saitji%20Saitji%20-%20Masstamilan.In-.mp3"
+  },
+
+{
+    name: "Salana-MassTamilan.dev.mp3",
+    artist: "Salana-MassTamilan.dev.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Salana-MassTamilan.dev.mp3"
+  },
+
+{
+    name: "Sangu_Sattham_[Masstamilan.In]-.mp3",
+    artist: "Sangu_Sattham_[Masstamilan.In]-.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Sangu%20Sattham%20[Masstamilan.In]-.mp3"
+  },
+
+{
+    name: "Shake_That.mp3",
+    artist: "Shake_That.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Shake%20That.mp3"
+  },
+
+{
+    name: "Singaar_Singh-Masstamilan.In.mp3",
+    artist: "Singaar_Singh-Masstamilan.In.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Singaar%20Singh-Masstamilan.In.mp3"
+  },
+
+{
+    name: "SunRise_Theme.mp3",
+    artist: "SunRise_Theme.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/SunRise%20Theme.mp3"
+  },
+
+{
+    name: "Suruli-Masstamilan.In.mp3",
+    artist: "Suruli-Masstamilan.In.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Suruli-Masstamilan.In.mp3"
+  },
+
+{
+    name: "Tasakku_Tasakku_[Masstamilan.In]-.mp3",
+    artist: "Tasakku_Tasakku_[Masstamilan.In]-.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Tasakku%20Tasakku%20[Masstamilan.In]-.mp3"
+  },
+
+{
+    name: "Teddy_Bear_Rhyme_-_Masstamilan.In.mp3",
+    artist: "Teddy_Bear_Rhyme_-_Masstamilan.In.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Teddy%20Bear%20Rhyme%20-%20Masstamilan.In.mp3"
+  },
+
+{
+    name: "TextToAudio1682276040203.mp3",
+    artist: "TextToAudio1682276040203.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/TextToAudio1682276040203.mp3"
+  },
+
+{
+    name: "Thaabangale_--_Masstamilan.In-.mp3",
+    artist: "Thaabangale_--_Masstamilan.In-.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Thaabangale%20--%20Masstamilan.In-.mp3"
+  },
+
+{
+    name: "Thalaivar_Theme_Song-Masstamilan.In.mp3",
+    artist: "Thalaivar_Theme_Song-Masstamilan.In.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Thalaivar%20Theme%20Song-Masstamilan.In.mp3"
+  },
+
+{
+    name: "Thani_Vazhi-Masstamilan.in.mp3",
+    artist: "Thani_Vazhi-Masstamilan.in.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Thani%20Vazhi-Masstamilan.in.mp3"
+  },
+
+{
+    name: "Thappad_Maara-Masstamilan.In.mp3",
+    artist: "Thappad_Maara-Masstamilan.In.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Thappad%20Maara-Masstamilan.In.mp3"
+  },
+
+{
+    name: "Tharam_Maara_Single-Masstamilan.In.mp3",
+    artist: "Tharam_Maara_Single-Masstamilan.In.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Tharam%20Maara%20Single-Masstamilan.In.mp3"
+  },
+
+{
+    name: "The_Life_of_Ram_--_Masstamilan.In-.mp3",
+    artist: "The_Life_of_Ram_--_Masstamilan.In-.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/The%20Life%20of%20Ram%20--%20Masstamilan.In-.mp3"
+  },
+
+{
+    name: "Theenga_Thaakka-Masstamilan.In.mp3",
+    artist: "Theenga_Thaakka-Masstamilan.In.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Theenga%20Thaakka-Masstamilan.In.mp3"
+  },
+
+{
+    name: "Theipirai-Masstamilan.In.mp3",
+    artist: "Theipirai-Masstamilan.In.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Theipirai-Masstamilan.In.mp3"
+  },
+
+{
+    name: "Tickle_My_Funny_Bone_-_Masstamilan.In.mp3",
+    artist: "Tickle_My_Funny_Bone_-_Masstamilan.In.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Tickle%20My%20Funny%20Bone%20-%20Masstamilan.In.mp3"
+  },
+
+{
+    name: "Trooper_Theme.mp3",
+    artist: "Trooper_Theme.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Trooper%20Theme.mp3"
+  },
+
+{
+    name: "Two_Two_Two.mp3",
+    artist: "Two_Two_Two.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Two_Two_Two.mp3"
+  },
+
+{
+    name: "Udhungada_Sangu….mp3",
+    artist: "Udhungada_Sangu….mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Udhungada%20Sangu….mp3"
+  },
+
+{
+    name: "Ullaallaa-Masstamilan.In.mp3",
+    artist: "Ullaallaa-Masstamilan.In.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Ullaallaa-Masstamilan.In.mp3"
+  },
+
+{
+    name: "Un_Vizhigalil.mp3",
+    artist: "Un_Vizhigalil.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Un_Vizhigalil.mp3"
+  },
+
+{
+    name: "Utchanthala-MassTamilan.dev.mp3",
+    artist: "Utchanthala-MassTamilan.dev.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Utchanthala-MassTamilan.dev.mp3"
+  },
+
+{
+    name: "Vaadi_Nee_Vaadi_-_Masstamilan.In-.mp3",
+    artist: "Vaadi_Nee_Vaadi_-_Masstamilan.In-.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Vaadi%20Nee%20Vaadi%20-%20Masstamilan.In-.mp3"
+  },
+
+{
+    name: "Vaaney_Vaaney_(Karaoke)-[Masstamilan.In].mp3",
+    artist: "Vaaney_Vaaney_(Karaoke)-[Masstamilan.In].mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Vaaney%20Vaaney%20(Karaoke)-[Masstamilan.In].mp3"
+  },
+
+{
+    name: "Vaaney_Vaaney-[Masstamilan.In].mp3",
+    artist: "Vaaney_Vaaney-[Masstamilan.In].mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Vaaney%20Vaaney-[Masstamilan.In].mp3"
+  },
+
+{
+    name: "Vaathi_Coming-Masstamilan.In.mp3",
+    artist: "Vaathi_Coming-Masstamilan.In.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Vaathi%20Coming-Masstamilan.In.mp3"
+  },
+
+{
+    name: "Vaathi_Raid-Masstamilan.In.mp3",
+    artist: "Vaathi_Raid-Masstamilan.In.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Vaathi%20Raid-Masstamilan.In.mp3"
+  },
+
+{
+    name: "Vasantha_Kaalangal_--_Masstamilan.In-.mp3",
+    artist: "Vasantha_Kaalangal_--_Masstamilan.In-.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Vasantha%20Kaalangal%20--%20Masstamilan.In-.mp3"
+  },
+
+{
+    name: "Veerane-MassTamilan.dev.mp3",
+    artist: "Veerane-MassTamilan.dev.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Veerane-MassTamilan.dev.mp3"
+  },
+
+{
+    name: "Velai_Illa_Pattadhaari….mp3",
+    artist: "Velai_Illa_Pattadhaari….mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Velai%20Illa%20Pattadhaari….mp3"
+  },
+
+{
+    name: "Vetti_Kattu_(Karaoke)-[Masstamilan.In].mp3",
+    artist: "Vetti_Kattu_(Karaoke)-[Masstamilan.In].mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Vetti%20Kattu%20(Karaoke)-[Masstamilan.In].mp3"
+  },
+
+{
+    name: "Vettikattu-Masstamilan.In.mp3",
+    artist: "Vettikattu-Masstamilan.In.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Vettikattu-Masstamilan.In.mp3"
+  },
+
+{
+    name: "Vidai-Kodu-Engal-Naadae.mp3",
+    artist: "Vidai-Kodu-Engal-Naadae.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Vidai-Kodu-Engal-Naadae.mp3"
+  },
+
+{
+    name: "Villain_Theme-Masstamilan.In.mp3",
+    artist: "Villain_Theme-Masstamilan.In.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Villain%20Theme-Masstamilan.In.mp3"
+  },
+
+{
+    name: "What_A_Karavad.mp3",
+    artist: "What_A_Karavad.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/What%20A%20Karavad.mp3"
+  },
+
+{
+    name: "Yaanji_[Masstamilan.In]-.mp3",
+    artist: "Yaanji_[Masstamilan.In]-.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Yaanji%20[Masstamilan.In]-.mp3"
+  },
+
+{
+    name: "Yean_--_Masstamilan.In-.mp3",
+    artist: "Yean_--_Masstamilan.In-.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Yean%20--%20Masstamilan.In-.mp3"
+  },
+
+{
+    name: "Yethu_Dharmam_[Masstamilan.In]-.mp3",
+    artist: "Yethu_Dharmam_[Masstamilan.In]-.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Yethu%20Dharmam%20[Masstamilan.In]-.mp3"
+  },
+
+{
+    name: "Yethu_Nyayam_[Masstamilan.In]-.mp3",
+    artist: "Yethu_Nyayam_[Masstamilan.In]-.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/Yethu%20Nyayam%20[Masstamilan.In]-.mp3"
+  },
+
+{
+    name: "adchithooku-Masstamilan.In.mp3",
+    artist: "adchithooku-Masstamilan.In.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/adchithooku-Masstamilan.In.mp3"
+  },
+
+{
+    name: "smiling_with_the_pain.mp3",
+    artist: "smiling_with_the_pain.mp3",
+    image: requestScheme + '://' + requestHost +"/static/music/Music_S/egin.jpg",
+    path: requestScheme + '://' + requestHost +"/static/music/Music_S/smiling%20with%20the%20pain.mp3"
+  },
+  {
+    name: "Enthusiast",
+    artist: "Tours",
+    image: "https://images.pexels.com/photos/3100835/pexels-photo-3100835.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=250&w=250",
+    path: "http://192.168.1.6:8000/static/music/Music_S/Azhagendra_Sollukku_-_Raag.Fm.mp3"
+  },
+  {
+    name: "Shipping Lanes",
+    artist: "Chad Crouch",
+    image: "https://images.pexels.com/photos/1717969/pexels-photo-1717969.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=250&w=250",
+    path: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/ccCommunity/Chad_Crouch/Arps/Chad_Crouch_-_Shipping_Lanes.mp3",
+  },
+];
+
+function random_bg_color() {
+
+// Get a number between 64 to 256 (for getting lighter colors)
+ let red = Math.floor(Math.random() * 256) + 64;
+ let green = Math.floor(Math.random() * 256) + 64;
+ let blue = Math.floor(Math.random() * 256) + 64;
+
+  // Construct a color withe the given values
+  let bgColor = "rgb(" + red + "," + green + "," + blue + ")";
+
+  // Set the background to that color
+  document.body.style.background = bgColor;
+}
+function fetchArrayFromAPI(url) {
+  return fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      // Return the array from the API response
+      return data;
+    })
+    .catch(error => {
+      // Handle any errors that occur during the request
+      console.error('Error:', error);
+    });
+}
+
+function loadTrack(track_index) {
+  clearInterval(updateTimer);
+  resetValues();
+  const apiUrl = requestScheme + '://' + requestHost +'/MUSIC/play_list?directory=/Music';
+fetchArrayFromAPI(apiUrl)
+  .then(myArray => {
+    // Use the returned array as input for other functions
+//const jsArray = JSON.parse(myArray)
+//console.log(jsArray);
+ const mod_array = Object.values(myArray.data);
+// console.log(myArray);
+// console.log(mod_array);
+ track_list = mod_array;
+ curr_track.src = track_list[track_index].path;
+ curr_track.load();
+//  track_art.style.backgroundImage = "url(" + track_list[track_index].image + ")";
+ track_name.textContent = track_list[track_index].name;
+ track_artist.textContent = track_list[track_index].artist;
+ now_playing.textContent = "PLAYING " + (track_index + 1) + " OF " + track_list.length;
+ updateTimer = setInterval(seekUpdate, 1000);
+ curr_track.addEventListener("ended", nextTrack);
+	  playTrack()
+	  document.title = track_name.textContent
+ });
+//random_bg_color();
+}
+
+function resetValues() {
+  curr_time.textContent = "00:00";
+  total_duration.textContent = "00:00";
+  seek_slider.value = 0;
+}
+
+// Load the first track in the tracklist
+loadTrack(track_index);
+
+function playpauseTrack() {
+  if (!isPlaying) playTrack();
+  else pauseTrack();
+}
+
+function playTrack() {
+  curr_track.play();
+  isPlaying = true;
+  playpause_btn.innerHTML = '<i class="fa fa-pause-circle fa-5x"></i>';
+}
+
+function pauseTrack() {
+  curr_track.pause();
+  isPlaying = false;
+  playpause_btn.innerHTML = '<i class="fa fa-play-circle fa-5x"></i>';;
+}
+
+function nextTrack() {
+  if (track_index < track_list.length - 1)
+    track_index += 1;
+  else track_index = 0;
+  loadTrack(track_index);
+  playTrack();
+}
+
+function prevTrack() {
+  if (track_index > 0)
+    track_index -= 1;
+  else track_index = track_list.length;
+  loadTrack(track_index);
+  playTrack();
+}
+
+function seekTo() {
+  let seekto = curr_track.duration * (seek_slider.value / 100);
+  curr_track.currentTime = seekto;
+}
+
+function setVolume() {
+  curr_track.volume = volume_slider.value / 100;
+}
+
+function seekUpdate() {
+  let seekPosition = 0;
+
+  if (!isNaN(curr_track.duration)) {
+    seekPosition = curr_track.currentTime * (100 / curr_track.duration);
+
+    seek_slider.value = seekPosition;
+
+    let currentMinutes = Math.floor(curr_track.currentTime / 60);
+    let currentSeconds = Math.floor(curr_track.currentTime - currentMinutes * 60);
+    let durationMinutes = Math.floor(curr_track.duration / 60);
+    let durationSeconds = Math.floor(curr_track.duration - durationMinutes * 60);
+
+    if (currentSeconds < 10) { currentSeconds = "0" + currentSeconds; }
+    if (durationSeconds < 10) { durationSeconds = "0" + durationSeconds; }
+    if (currentMinutes < 10) { currentMinutes = "0" + currentMinutes; }
+    if (durationMinutes < 10) { durationMinutes = "0" + durationMinutes; }
+
+    curr_time.textContent = currentMinutes + ":" + currentSeconds;
+    total_duration.textContent = durationMinutes + ":" + durationSeconds;
+  }
+}

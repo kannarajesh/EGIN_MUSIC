@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Music Player</title>
+  <!-- Load FontAwesome icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+  <!-- Load the custom CSS style file -->
+  <link rel="stylesheet" type="text/css" href="{% static 'music/style.css' %}">
+</head>
+<div class="container">
+      <div class="p1">
+        <h1>
+          Welcome to Music Egin,
+          <span>Rajesh</span>
+        </h1>
+
+        <div class="open_pg1">
+          <h2>Tell me what type of songs needed</h2>
+        </div>
+        <div class="open_pg1_b1">
+          <a href="{{ request.scheme }}://{{ request.get_host }}/MUSIC?play=GYM">
+		<div class="open_pg1_b1-1">
+            <div class="left">
+              <p>Fast Beat Songs</p>
+              <h2>GYM</h2>
+            </div>
+            </div>
+		</a>
+	  
+           <div class="open_pg1_b2">
+          <a href="{{ request.scheme }}://{{ request.get_host }}/MUSIC?play=devotional">
+            <div class="open_pg1_b2-1">
+              <div class="left">
+                <p>Devotional</p>
+                <h2>Morning</h2>
+              </div>
+                          </div>
+	  </a>
+
+            <div class="open_pg1_b3">
+          <a href="{{ request.scheme }}://{{ request.get_host }}/MUSIC?play=travel">
+                          <div class="open_pg1_b3-1">
+              <div class="left">
+                <p>Mixed</p>
+                <h2>Travel</h2>
+              </div>
+            </div>
+	  </a>
+          </div>
+        </div>
+
+        <svg class="back-button"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+        >
+
+        </svg>
+      </div>
+    </div>

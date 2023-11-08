@@ -1,0 +1,276 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+          box-sizing: inherit;
+}
+
+a {
+  text-decoration: none;
+}
+
+body {
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  line-height: 1.7;
+  position: relative;
+  background: linear-gradient(to right bottom, #323941, #061018);
+  height: 100vh;
+}
+
+.container {
+  position: absolute;
+  left: 40%;
+  top: 45%;
+          transform: translate(-50%, -50%);
+  overflow: hidden;
+  width: 320px;
+  height: 640px;
+  border-radius: 20px;
+}
+
+.p1 {
+  position: relative;
+  padding: 20px 20px;
+}
+
+.p1 h1 {
+  margin: 20px 10px 0 10px;
+  font-weight: 400;
+  font-size: 22px;
+  color: rgba(255, 255, 255, 0.473);
+}
+
+.p1 h1 span {
+  font-weight: 600;
+  font-size: 28px;
+  color: white;
+}
+
+.p1 .open_pg1 {
+  margin: 40px 10px 0 10px;
+  display: flex;
+          align-items: flex-end;
+          justify-content: space-between;
+}
+
+.p1 .open_pg1 h2 {
+  font-size: 20px;
+  color: rgba(255, 255, 255, 0.473);
+  font-weight: 600;
+}
+
+.p1 .open_pg1 h2:last-child {
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.p1 .player {
+  height: 2vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.p1 .open_pg1_b1 {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.p1 .open_pg1_b1-1 {
+  display: flex;
+  background: linear-gradient(to right bottom, #ffca28, #ffa000);
+  padding: 20px;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+          box-shadow: 0px 2px 10px 2px rgba(23, 24, 26, 0.66);
+  cursor: pointer;
+}
+
+.p1 .open_pg1_b1-1 .left {
+          flex: 1;
+}
+
+.p1 .open_pg1_b1-1 .left p {
+  font-size: 12px;
+  font-weight: 500;
+  color: #ef6c00;
+}
+
+.p1 .open_pg1_b1-1 .left h2 {
+  font-size: 18px;
+  color: #e65100;
+  line-height: 1.2;
+}
+.p1 .open_pg1_b2 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.p1 .open_pg1_b2-1 {
+  display: flex;
+  background: linear-gradient(to right bottom, #42a5f5, #1e88e5);
+  padding: 20px;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+          box-shadow: 0px 2px 10px 2px rgba(23, 24, 26, 0.66);
+  cursor: pointer;
+}
+
+.p1 .open_pg1_b2-1 .left {
+          flex: 1;
+}
+
+.p1 .open_pg1_b2-1 .left p {
+  font-size: 12px;
+  font-weight: 500;
+  color: #0277bd;
+}
+
+.p1 .open_pg1_b2-1 .left h2 {
+  font-size: 18px;
+  color: #01579b;
+  line-height: 1.2;
+}
+.p1 .open_pg1_b3 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.p1 .open_pg1_b3-1 {
+  display: flex;
+  background: linear-gradient(to right bottom, #ff5246, #d31f31);
+  padding: 20px;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+          box-shadow: 0px 2px 10px 2px rgba(23, 24, 26, 0.66);
+  cursor: pointer;
+}
+
+.p1 .open_pg1_b3-1 .left {
+          flex: 1;
+}
+
+.p1 .open_pg1_b3-1 .left p {
+  font-size: 12px;
+  font-weight: 500;
+  color: #ad1c1c;
+}
+
+.p1 .open_pg1_b3-1 .left h2 {
+  font-size: 18px;
+  color: #a71717;
+  line-height: 1.2;
+}
+
+.p1 .details {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+
+
+.track-art {
+  margin: 25px;
+  height: 250px;
+  width: 250px;
+  background-image: url("https://test");
+  background-size: cover;
+  border-radius: 15%;
+}
+
+.now-playing {
+  font-size: 1rem;
+}
+
+.track-name {
+  font-size: 3rem;
+}
+
+.track-artist {
+  font-size: 1.5rem;
+}
+
+.p1 .buttons {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.playpause-track, .prev-track, .next-track {
+  padding: 25px;
+  opacity: 0.8;
+
+  /* Smoothly transition the opacity */
+ transition: opacity .2s;
+}
+
+
+.playpause-track:hover, .prev-track:hover, .next-track:hover {
+  opacity: 1.0;
+}
+
+.slider_container {
+  width: 75%;
+  max-width: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Modify the appearance of the slider */
+.seek_slider, .volume_slider {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  height: 5px;
+  background: black;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+/* Modify the appearance of the slider thumb */
+.seek_slider::-webkit-slider-thumb, .volume_slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  background: white;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.seek_slider:hover, .volume_slider:hover {
+  opacity: 1.0;
+}
+
+.seek_slider {
+  width: 60%;
+}
+
+.volume_slider {
+  width: 30%;
+}
+
+.current-time, .total-duration {
+  padding: 10px;
+}
+
+i.fa-volume-down, i.fa-volume-up {
+  padding: 10px;
+}
+
+i.fa-play-circle, i.fa-pause-circle, i.fa-step-forward, i.fa-step-backward {
+  cursor: pointer;
+}

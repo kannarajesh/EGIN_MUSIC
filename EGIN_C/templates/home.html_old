@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>EGIN MUSIC</title>
+  <style>
+    /* Add some modern styles for the website */
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f2f2f2;
+    }
+    header {
+      background-color: #333;
+      padding: 20px;
+      color: #fff;
+      text-align: center;
+    }
+    h1 {
+      margin: 0;
+      font-size: 32px;
+    }
+    nav {
+      background-color: #444;
+      padding: 10px;
+    }
+    nav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+    }
+    nav li {
+      margin: 0 10px;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+    }
+    section {
+      padding: 50px;
+      text-align: center;
+    }
+    footer {
+      background-color: #333;
+      padding: 20px;
+      color: #fff;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>EGIN MUSIC</h1>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="{{ request.scheme }}://{{ request.get_host }}">Home</a></li>
+      <li><a href="{{ request.scheme }}://{{ request.get_host }}/MUSIC">Player</a></li>
+      <li><a href="{{ request.scheme }}://{{ request.get_host }}/admin">Admin</a></li>
+      <li><a href="{{ request.scheme }}://{{ request.get_host }}/songs">Songs</a></li>
+    </ul>
+  </nav>
+
+  <section>
+    <h2>Welcome to EGIN MUSIC</h2>
+    <p>THIS IS FOR HOME MUSIC</p>
+        </section>
+
+  <footer>
+    &copy; 2023 Designed Website. All rights reserved.
+  </footer>
+</body>
+</html>

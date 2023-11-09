@@ -1,9 +1,10 @@
 #/bin/bash
-source /apps/MYWEB_U/bin/activate
+##/bin/bash
+source /root/EGIN_M/bin/activate
 
 
 if [ $1 == "get" ]
-then 
+then
 URL=$(curl http://127.0.0.1:4040/api/tunnels -s |python -m json.tool | grep "public_url" | awk -F '"' '{print $4}')
 echo $URL
 curl "https://api.telegram.org/bot$(cat /apps/TELEGRAM_BOT/bot_api)/sendMessage?chat_id=$(cat /apps/TELEGRAM_BOT/chat_id)&text=$URL"
@@ -15,9 +16,9 @@ then
  echo "site up already"
 exit
 else
-	nohup python /apps/EGIN/manage.py runserver 0.0.0.0:8000 >>/apps/EGIN/weblogs.log &
-#	nohup /usr/local/bin/ngrok http 8000 &
-#	curl http://127.0.0.1:4040/api/tunnels
+        nohup python /root/EGIN_M_C/EGIN_MUSIC/manage.py runserver 0.0.0.0:8000 >>/root/EGIN_M_C/EGIN_MUSIC/weblogs.log &
+#       nohup /usr/local/bin/ngrok http 8000 &
+#       curl http://127.0.0.1:4040/api/tunnels
 fi
 elif [ $1 == "wstart" ]
 then
@@ -26,20 +27,20 @@ if [ $? -eq 0 ]
 then
  echo "site up"
 #exit
-#	nohup python /apps/EGIN/manage.py runserver 0.0.0.0:8000 &
-	nohup /usr/local/bin/ngrok http 8000 &
-	echo "waiting for site up ..."
-	sleep 5
-	URL=$(curl http://127.0.0.1:4040/api/tunnels -s |python -m json.tool | grep "public_url" | awk -F '"' '{print $4}')
-	echo $URL
-	curl "https://api.telegram.org/bot$(cat /apps/TELEGRAM_BOT/bot_api)/sendMessage?chat_id=$(cat /apps/TELEGRAM_BOT/chat_id)&text=$URL"
-else 
+#       nohup python /apps/EGIN/manage.py runserver 0.0.0.0:8000 &
+        nohup /usr/local/bin/ngrok http 8000 &
+        echo "waiting for site up ..."
+        sleep 5
+        URL=$(curl http://127.0.0.1:4040/api/tunnels -s |python -m json.tool | grep "public_url" | awk -F '"' '{print $4}')
+        echo $URL
+        curl "https://api.telegram.org/bot$(cat /apps/TELEGRAM_BOT/bot_api)/sendMessage?chat_id=$(cat /apps/TELEGRAM_BOT/chat_id)&text=$URL"
+else
 echo "SITE DOWN"
 fi
 elif [ $1 == "stop" ]
 then
 echo "KILLING ALL"
-pkill -f /apps/EGIN/manage.py
+pkill -f /root/EGIN_M_C/EGIN_MUSIC/manage.py
 pkill -f /usr/local/bin/ngrok
 elif [ $1 == "status" ]
 then
@@ -47,7 +48,7 @@ nc -z localhost 8000
 if [ $? -eq 0 ]
 then
 echo "site up already"
-else 
+else
 echo "port is not running try starting"
 exit
 fi

@@ -4,7 +4,8 @@ import os
 import json
 import hashlib
 import urllib.parse
-import os
+import requests
+import json
 from tinytag import TinyTag
 from django.http import JsonResponse
 import json
@@ -30,246 +31,6 @@ def play_list1(request):
     'artist': 'GOD',
     'image': 'http' + '://' + request_host +'/static/music/Music_S/egin.jpg',
     'path': 'http://www.friendstamilmp3.in/songs2/Devotional Collections/Hindu Collections/Murugan Songs 1/Aadhaaram Enrum Neethane.mp3'
-  },
-{ 'name': 'Muruga - 1',
-    'artist': 'GOD',
-    'image': 'http' + '://' + request_host +'/static/music/Music_S/egin.jpg',
-    'path': 'http://www.friendstamilmp3.in/songs2/Devotional Collections/Hindu Collections/Murugan Songs 1/Aadhaaram Neeye.mp3'
-  },
-{ 'name': 'Muruga - 2',
-    'artist': 'GOD',
-    'image': 'http' + '://' + request_host +'/static/music/Music_S/egin.jpg',
-    'path': 'http://www.friendstamilmp3.in/songs2/Devotional Collections/Hindu Collections/Murugan Songs 1/Aadhaaram Nin Sirippatharam.mp3'
-  },
-{ 'name': 'Muruga - 3',
-    'artist': 'GOD',
-    'image': 'http' + '://' + request_host +'/static/music/Music_S/egin.jpg',
-    'path': 'http://www.friendstamilmp3.in/songs2/Devotional Collections/Hindu Collections/Murugan Songs 1/Aadheenampaal Kodukka.mp3'
-  },
-{ 'name': 'Muruga - 4',
-    'artist': 'GOD',
-    'image': 'http' + '://' + request_host +'/static/music/Music_S/egin.jpg',
-    'path': 'http://www.friendstamilmp3.in/songs2/Devotional Collections/Hindu Collections/Murugan Songs 1/Aadu Mayile.mp3'
-  },
-{ 'name': 'Muruga - 5',
-    'artist': 'GOD',
-    'image': 'http' + '://' + request_host +'/static/music/Music_S/egin.jpg',
-    'path': 'http://www.friendstamilmp3.in/songs2/Devotional Collections/Hindu Collections/Murugan Songs 1/Aaru Padai Veedugalil.mp3'
-  },
-{ 'name': 'Muruga - 6',
-    'artist': 'GOD',
-    'image': 'http' + '://' + request_host +'/static/music/Music_S/egin.jpg',
-    'path': 'http://www.friendstamilmp3.in/songs2/Devotional Collections/Hindu Collections/Murugan Songs 1/Aarumugamana Porul.mp3'
-  },
-{ 'name': 'Muruga - 7',
-    'artist': 'GOD',
-    'image': 'http' + '://' + request_host +'/static/music/Music_S/egin.jpg',
-    'path': 'http://www.friendstamilmp3.in/songs2/Devotional Collections/Hindu Collections/Murugan Songs 1/Aarumugane Asai Manasukkul.mp3'
-  },
-{ 'name': 'Muruga - 8',
-    'artist': 'GOD',
-    'image': 'http' + '://' + request_host +'/static/music/Music_S/egin.jpg',
-    'path': 'http://www.friendstamilmp3.in/songs2/Devotional Collections/Hindu Collections/Murugan Songs 1/Aarupadai Veedu Konda.mp3'
-  },
-{ 'name': 'Muruga - 9',
-    'artist': 'GOD',
-    'image': 'http' + '://' + request_host +'/static/music/Music_S/egin.jpg',
-    'path': 'http://www.friendstamilmp3.in/songs2/Devotional Collections/Hindu Collections/Murugan Songs 1/Aaruthal Arulvai.mp3'
-  },
-{ 'name': 'Muruga - 10',
-    'artist': 'GOD',
-    'image': 'http' + '://' + request_host +'/static/music/Music_S/egin.jpg',
-    'path': 'http://www.friendstamilmp3.in/songs2/Devotional Collections/Hindu Collections/Murugan Songs 1/Aaruvayal Kaadu Angamellam Thanga Nagai.mp3'
-  },
-{ 'name': 'Muruga - 11',
-    'artist': 'GOD',
-    'image': 'http' + '://' + request_host +'/static/music/Music_S/egin.jpg',
-    'path': 'http://www.friendstamilmp3.in/songs2/Devotional Collections/Hindu Collections/Murugan Songs 1/Aayiram Paatezhuthi.mp3'
-  },
-{ 'name': 'Muruga - 12',
-    'artist': 'GOD',
-    'image': 'http' + '://' + request_host +'/static/music/Music_S/egin.jpg',
-    'path': 'http://www.friendstamilmp3.in/songs2/Devotional Collections/Hindu Collections/Murugan Songs 1/Aiyappa Saranam Saranam.mp3'
-  },
-{ 'name': 'Muruga - 13',
-    'artist': 'GOD',
-    'image': 'http' + '://' + request_host +'/static/music/Music_S/egin.jpg',
-    'path': 'http://www.friendstamilmp3.in/songs2/Devotional Collections/Hindu Collections/Murugan Songs 1/Ariyathu Ketkum.mp3'
-  },
-{ 'name': 'Muruga - 14',
-    'artist': 'GOD',
-    'image': 'http' + '://' + request_host +'/static/music/Music_S/egin.jpg',
-    'path': 'http://www.friendstamilmp3.in/songs2/Devotional Collections/Hindu Collections/Murugan Songs 1/Arogara Enru Solli.mp3'
-  },
-{ 'name': 'Muruga - 15',
-    'artist': 'GOD',
-    'image': 'http' + '://' + request_host +'/static/music/Music_S/egin.jpg',
-    'path': 'http://www.friendstamilmp3.in/songs2/Devotional Collections/Hindu Collections/Murugan Songs 1/En Appane Ennai Aiyane.mp3'
-  },
-{ 'name': 'Muruga - 16',
-    'artist': 'GOD',
-    'image': 'http' + '://' + request_host +'/static/music/Music_S/egin.jpg',
-    'path': 'http://www.friendstamilmp3.in/songs2/Devotional Collections/Hindu Collections/Murugan Songs 1/Engellam Theduvatho.mp3'
-  },
-{ 'name': 'Muruga - 17',
-    'artist': 'GOD',
-    'image': 'http' + '://' + request_host +'/static/music/Music_S/egin.jpg',
-    'path': 'http://www.friendstamilmp3.in/songs2/Devotional Collections/Hindu Collections/Murugan Songs 1/Engum Thirinthu Varum.mp3'
-  },
-{ 'name': 'Muruga - 18',
-    'artist': 'GOD',
-    'image': 'http' + '://' + request_host +'/static/music/Music_S/egin.jpg',
-    'path': 'http://www.friendstamilmp3.in/songs2/Devotional Collections/Hindu Collections/Murugan Songs 1/Gnamum Kalviyum.mp3'
-  },
-{ 'name': 'Muruga - 19',
-    'artist': 'GOD',
-    'image': 'http' + '://' + request_host +'/static/music/Music_S/egin.jpg',
-    'path': 'http://www.friendstamilmp3.in/songs2/Devotional Collections/Hindu Collections/Murugan Songs 1/Ka Ka Kandhane Varuga.mp3'
-  },
-{ 'name': 'Muruga - 20',
-    'artist': 'GOD',
-    'image': 'http' + '://' + request_host +'/static/music/Music_S/egin.jpg',
-    'path': 'http://www.friendstamilmp3.in/songs2/Devotional Collections/Hindu Collections/Murugan Songs 1/Kaalai Ilam Kathiril.mp3'
-  },
-{ 'name': 'Muruga - 21',
-    'artist': 'GOD',
-    'image': 'http' + '://' + request_host +'/static/music/Music_S/egin.jpg',
-    'path': 'http://www.friendstamilmp3.in/songs2/Devotional Collections/Hindu Collections/Murugan Songs 1/Kaalamenum Thottathile.mp3'
-  },
-{ 'name': 'Muruga - 22',
-    'artist': 'GOD',
-    'image': 'http' + '://' + request_host +'/static/music/Music_S/egin.jpg',
-    'path': 'http://www.friendstamilmp3.in/songs2/Devotional Collections/Hindu Collections/Murugan Songs 1/Kadalil Alai Thulla.mp3'
-  },
-{ 'name': 'Muruga - 23',
-    'artist': 'GOD',
-    'image': 'http' + '://' + request_host +'/static/music/Music_S/egin.jpg',
-    'path': 'http://www.friendstamilmp3.in/songs2/Devotional Collections/Hindu Collections/Murugan Songs 1/Kandha Sasti Kavasam.mp3'
-  },
-{ 'name': 'Muruga - 24',
-    'artist': 'GOD',
-    'image': 'http' + '://' + request_host +'/static/music/Music_S/egin.jpg',
-    'path': 'http://www.friendstamilmp3.in/songs2/Devotional Collections/Hindu Collections/Murugan Songs 1/Kandhan Kaaladiyai.mp3'
-  },
-{ 'name': 'Muruga - 25',
-    'artist': 'GOD',
-    'image': 'http' + '://' + request_host +'/static/music/Music_S/egin.jpg',
-    'path': 'http://www.friendstamilmp3.in/songs2/Devotional Collections/Hindu Collections/Murugan Songs 1/Kandhan Thiruneeraninthal.mp3'
-  },
-{ 'name': 'Muruga - 26',
-    'artist': 'GOD',
-    'image': 'http' + '://' + request_host +'/static/music/Music_S/egin.jpg',
-    'path': 'http://www.friendstamilmp3.in/songs2/Devotional Collections/Hindu Collections/Murugan Songs 1/Kandhanum Varuvan.mp3'
-  },
-{ 'name': 'Muruga - 27',
-    'artist': 'GOD',
-    'image': 'http' + '://' + request_host +'/static/music/Music_S/egin.jpg',
-    'path': 'http://www.friendstamilmp3.in/songs2/Devotional Collections/Hindu Collections/Murugan Songs 1/Kandhar Sasti Kavasam.mp3'
-  },
-{ 'name': 'Muruga - 28',
-    'artist': 'GOD',
-    'image': 'http' + '://' + request_host +'/static/music/Music_S/egin.jpg',
-    'path': 'http://www.friendstamilmp3.in/songs2/Devotional Collections/Hindu Collections/Murugan Songs 1/Kandu Konden.mp3'
-  },
-{ 'name': 'Muruga - 29',
-    'artist': 'GOD',
-    'image': 'http' + '://' + request_host +'/static/music/Music_S/egin.jpg',
-    'path': 'http://www.friendstamilmp3.in/songs2/Devotional Collections/Hindu Collections/Murugan Songs 1/Kanni Thamilukku.mp3'
-  },
-{ 'name': 'Muruga - 30',
-    'artist': 'GOD',
-    'image': 'http' + '://' + request_host +'/static/music/Music_S/egin.jpg',
-    'path': 'http://www.friendstamilmp3.in/songs2/Devotional Collections/Hindu Collections/Murugan Songs 1/Karpanai Enralum Karsilai.mp3'
-  },
-{ 'name': 'Muruga - 31',
-    'artist': 'GOD',
-    'image': 'http' + '://' + request_host +'/static/music/Music_S/egin.jpg',
-    'path': 'http://www.friendstamilmp3.in/songs2/Devotional Collections/Hindu Collections/Murugan Songs 1/Kolamayil Thiru Vadivam.mp3'
-  },
-{ 'name': 'Muruga - 32',
-    'artist': 'GOD',
-    'image': 'http' + '://' + request_host +'/static/music/Music_S/egin.jpg',
-    'path': 'http://www.friendstamilmp3.in/songs2/Devotional Collections/Hindu Collections/Murugan Songs 1/Konjum Kili Kuruvi.mp3'
-  },
-{ 'name': 'Muruga - 33',
-    'artist': 'GOD',
-    'image': 'http' + '://' + request_host +'/static/music/Music_S/egin.jpg',
-    'path': 'http://www.friendstamilmp3.in/songs2/Devotional Collections/Hindu Collections/Murugan Songs 1/Koodave Iruppan Kumaran.mp3'
-  },
-{ 'name': 'Muruga - 34',
-    'artist': 'GOD',
-    'image': 'http' + '://' + request_host +'/static/music/Music_S/egin.jpg',
-    'path': 'http://www.friendstamilmp3.in/songs2/Devotional Collections/Hindu Collections/Murugan Songs 1/Koopitta Kuralukku.mp3'
-  },
-{ 'name': 'Muruga - 35',
-    'artist': 'GOD',
-    'image': 'http' + '://' + request_host +'/static/music/Music_S/egin.jpg',
-    'path': 'http://www.friendstamilmp3.in/songs2/Devotional Collections/Hindu Collections/Murugan Songs 1/Kundrathile Kumaranukku.mp3'
-  },
-{ 'name': 'Muruga - 36',
-    'artist': 'GOD',
-    'image': 'http' + '://' + request_host +'/static/music/Music_S/egin.jpg',
-    'path': 'http://www.friendstamilmp3.in/songs2/Devotional Collections/Hindu Collections/Murugan Songs 1/Kundru Valar Kandhan.mp3'
-  },
-{ 'name': 'Muruga - 37',
-    'artist': 'GOD',
-    'image': 'http' + '://' + request_host +'/static/music/Music_S/egin.jpg',
-    'path': 'http://www.friendstamilmp3.in/songs2/Devotional Collections/Hindu Collections/Murugan Songs 1/Kurinjiyile Poo Malarnthu.mp3'
-  },
-{ 'name': 'Muruga - 38',
-    'artist': 'GOD',
-    'image': 'http' + '://' + request_host +'/static/music/Music_S/egin.jpg',
-    'path': 'http://www.friendstamilmp3.in/songs2/Devotional Collections/Hindu Collections/Murugan Songs 1/Maalai Vanna Maalai.mp3'
-  },
-{ 'name': 'Muruga - 39',
-    'artist': 'GOD',
-    'image': 'http' + '://' + request_host +'/static/music/Music_S/egin.jpg',
-    'path': 'http://www.friendstamilmp3.in/songs2/Devotional Collections/Hindu Collections/Murugan Songs 1/Manimudi Oraaru.mp3'
-  },
-{ 'name': 'Muruga - 40',
-    'artist': 'GOD',
-    'image': 'http' + '://' + request_host +'/static/music/Music_S/egin.jpg',
-    'path': 'http://www.friendstamilmp3.in/songs2/Devotional Collections/Hindu Collections/Murugan Songs 1/Mannukkum Vinnukkum.mp3'
-  },
-{ 'name': 'Muruga - 41',
-    'artist': 'GOD',
-    'image': 'http' + '://' + request_host +'/static/music/Music_S/egin.jpg',
-    'path': 'http://www.friendstamilmp3.in/songs2/Devotional Collections/Hindu Collections/Murugan Songs 1/Margali Sendru Thai Madham.mp3'
-  },
-{ 'name': 'Muruga - 42',
-    'artist': 'GOD',
-    'image': 'http' + '://' + request_host +'/static/music/Music_S/egin.jpg',
-    'path': 'http://www.friendstamilmp3.in/songs2/Devotional Collections/Hindu Collections/Murugan Songs 1/Muruga Muruga.mp3'
-  },
-{ 'name': 'Muruga - 43',
-    'artist': 'GOD',
-    'image': 'http' + '://' + request_host +'/static/music/Music_S/egin.jpg',
-    'path': 'http://www.friendstamilmp3.in/songs2/Devotional Collections/Hindu Collections/Murugan Songs 1/Muruga Nee Varavendum.mp3'
-  },
-{ 'name': 'Muruga - 44',
-    'artist': 'GOD',
-    'image': 'http' + '://' + request_host +'/static/music/Music_S/egin.jpg',
-    'path': 'http://www.friendstamilmp3.in/songs2/Devotional Collections/Hindu Collections/Murugan Songs 1/Muruga Un Kunam.mp3'
-  },
-{ 'name': 'Muruga - 45',
-    'artist': 'GOD',
-    'image': 'http' + '://' + request_host +'/static/music/Music_S/egin.jpg',
-    'path': 'http://www.friendstamilmp3.in/songs2/Devotional Collections/Hindu Collections/Murugan Songs 1/MuruganaiKoopittu.mp3'
-  },
-{ 'name': 'Muruga - 46',
-    'artist': 'GOD',
-    'image': 'http' + '://' + request_host +'/static/music/Music_S/egin.jpg',
-    'path': 'http://www.friendstamilmp3.in/songs2/Devotional Collections/Hindu Collections/Murugan Songs 1/Muththana Muthukumara.mp3'
-  },
-{ 'name': 'Muruga - 47',
-    'artist': 'GOD',
-    'image': 'http' + '://' + request_host +'/static/music/Music_S/egin.jpg',
-    'path': 'http://www.friendstamilmp3.in/songs2/Devotional Collections/Hindu Collections/Murugan Songs 1/Nee Allaal Theivam.mp3'
-  },
-{ 'name': 'Muruga - 48',
-    'artist': 'GOD',
-    'image': 'http' + '://' + request_host +'/static/music/Music_S/egin.jpg',
-    'path': 'http://www.friendstamilmp3.in/songs2/Devotional Collections/Hindu Collections/Murugan Songs 1/Nee Oru Thaai Aanal.mp3'
   },
 { 'name': 'Muruga - 49',
     'artist': 'GOD',
@@ -326,15 +87,35 @@ def play_list2(request):
 
 # Print the JSON response
 def play_list3(request):
+    url = "https://raw.githubusercontent.com/kannarajesh/EGIN_MUSIC/main/MUSIC/travel.linklist"
     request_host = request.META.get('HTTP_HOST')
-    response_data = [{ 'name': 'Song-1',
-    'artist': 'Travel',
-    'image': 'http' + '://' + request_host +'/static/music/Music_S/egin.jpg',
-    'path': 'http://www.friendstamilmp3.in/songs2/A-Z%20Movie%20Songs/Maamannan%20(2023)/Raasa%20Kannu%20(Malaiyilathan%20Theepidikkuthu%20Raasaa).mp3'
-    }]
-    response_data4 = {'data': response_data}
-    return JsonResponse(response_data4)
-
+    response = requests.get(url)
+    data = response.text
+    lines = data.split('\n')  # Split the text into lines
+    json_objects = []
+    response_data = []
+    for line in lines:
+        # Ignore empty lines
+        if line.strip():
+            # Create a dictionary from the line and append it to the list
+            try:
+                url_parts = line.strip().split("/")
+                last_part = url_parts[-1].replace(".mp3", "").replace("%20", " ") 
+                last_part_1 = url_parts[-2].replace("%20", " ") 
+                last_part_without_extension = last_part.split(".", 1)[0] if "." in last_part else last_part
+                json_object = {"url": line.strip()}
+                json_object = {"name": last_part, "artist": last_part_1 ,"image": "http" + "://" + request_host +"/static/music/Music_S/egin.jpg","path": line.strip()}
+                json_objects.append(json_object)
+            except json.JSONDecodeError as e:
+                print(f"Error decoding JSON from line: {line}\nError: {e}")
+#    for obj in json_objects:
+#    response_data.append(json.dumps(obj, indent=2))
+    #response_data.append({"data": json_objects})  # Append the entire list as a JSON object
+    response_data = {"data": json_objects} 
+    return JsonResponse(response_data, json_dumps_params={'indent': 2}, safe=False)
+#    response_data4 = {'data': response_data}
+#    return JsonResponse(response_data4)
+###################################
 def play_list(request):
     request_host = request.META.get('HTTP_HOST')
     playlist = request.GET.get('play')

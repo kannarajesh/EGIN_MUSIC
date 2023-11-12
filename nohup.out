@@ -1,0 +1,23 @@
+Watching for file changes with StatReloader
+[12/Nov/2023 22:15:05] "GET /MUSIC/?play=travel HTTP/1.0" 200 1848
+[12/Nov/2023 22:15:06] "GET /MUSIC/play_list?directory=/Music&play=travel HTTP/1.0" 200 974
+[12/Nov/2023 22:19:07] "GET / HTTP/1.0" 200 1727
+[12/Nov/2023 22:19:07] "GET /static/music/style.css HTTP/1.0" 200 5016
+[12/Nov/2023 22:19:09] "GET /MUSIC?play=travel HTTP/1.0" 301 0
+[12/Nov/2023 22:19:09] "GET /MUSIC/?play=travel HTTP/1.0" 200 1848
+[12/Nov/2023 22:19:09] "GET /static/music/main.js HTTP/1.0" 200 4627
+[12/Nov/2023 22:19:09] "GET /MUSIC/play_list?directory=/Music&play=travel HTTP/1.0" 200 974
+[12/Nov/2023 22:19:09] "GET /static/music/Music_S/egin.jpg HTTP/1.0" 200 18718
+[12/Nov/2023 22:19:14] "GET /MUSIC/play_list?directory=/Music&play=travel HTTP/1.0" 200 974
+[12/Nov/2023 22:19:24] "GET /MUSIC/play_list?directory=/Music&play=travel HTTP/1.0" 200 974
+[12/Nov/2023 22:20:03] "GET /MUSIC/play_list?directory=/Music&play=travel HTTP/1.0" 200 974
+[12/Nov/2023 22:20:06] "GET /MUSIC/play_list?directory=/Music&play=travel HTTP/1.0" 200 974
+[12/Nov/2023 22:33:59] "GET /MUSIC/ HTTP/1.1" 200 1852
+[12/Nov/2023 22:50:29] "GET / HTTP/1.0" 200 1727
+[12/Nov/2023 22:50:29] "GET /static/music/style.css HTTP/1.0" 304 0
+[12/Nov/2023 22:50:31] "GET / HTTP/1.0" 200 1727
+[12/Nov/2023 22:50:34] "GET /MUSIC/?play=travel HTTP/1.0" 200 1848
+[12/Nov/2023 22:50:34] "GET /static/music/main.js HTTP/1.0" 304 0
+[12/Nov/2023 22:50:34] "GET /MUSIC/play_list?directory=/Music&play=travel HTTP/1.0" 200 974
+[12/Nov/2023 22:50:34] "GET /static/music/Music_S/egin.jpg HTTP/1.0" 304 0
+[12/Nov/2023 22:50:46] "GET /MUSIC/play_list?directory=/Music&play=travel HTTP/1.0" 200 974

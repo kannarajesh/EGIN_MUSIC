@@ -325,6 +325,15 @@ def play_list2(request):
 # Convert the dictionary to JSON
 
 # Print the JSON response
+def play_list3(request):
+    request_host = request.META.get('HTTP_HOST')
+    response_data = [{ 'name': 'Song-1',
+    'artist': 'Travel',
+    'image': 'http' + '://' + request_host +'/static/music/Music_S/egin.jpg',
+    'path': 'http://www.friendstamilmp3.in/songs2/A-Z%20Movie%20Songs/Maamannan%20(2023)/Raasa%20Kannu%20(Malaiyilathan%20Theepidikkuthu%20Raasaa).mp3'
+    }]
+    response_data4 = {'data': response_data}
+    return JsonResponse(response_data4)
 
 def play_list(request):
     request_host = request.META.get('HTTP_HOST')
@@ -332,5 +341,8 @@ def play_list(request):
     if playlist == "GYM":
         print("INside GYM playlist")
         return play_list2(request)
-    else:
+    elif playlist == "travel":
+        return play_list3(request)
+    else: 
         return play_list1(request)
+

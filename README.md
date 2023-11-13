@@ -1,3 +1,6 @@
+https://www.jenkins.io/doc/book/installing/kubernetes/#create-a-deployment
+
+
 ##vim /etc/netplan/00-installer-config.yaml
 cat /etc/netplan/00-installer-config.yaml > 00-installer-config.yaml
 ##ip a

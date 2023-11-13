@@ -11,7 +11,7 @@ pipeline {
 
     stage('Checkout Source') {
       steps {
-        git credentialsId: 'github-credentials',url: 'https://github.com/kannarajesh/EGIN_MUSIC.git'
+        git 'https://github.com/kannarajesh/EGIN_MUSIC.git'
       }
     }
 

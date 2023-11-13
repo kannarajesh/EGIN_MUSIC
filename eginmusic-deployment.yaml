@@ -3,20 +3,20 @@ kind: Deployment
 metadata:
   name: eginmusic
   labels:
-    app: django
+    app: eginmusic
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
-      app: django
+      app: eginmusic
   template:
     metadata:
       labels:
-        app: django
+        app: eginmusic
     spec:
       containers:
-        - image: kannarajesh064/eginmusic:tagname
-          name: django
+        - image: kannarajesh064/eginmusic:latest
+          name: eginmusic
           ports:
             - containerPort: 8000
               name: eginmusic

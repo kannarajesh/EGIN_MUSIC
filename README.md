@@ -1,4 +1,5 @@
 https://www.jenkins.io/doc/book/installing/kubernetes/#create-a-deployment
+https://sweetcode.io/how-to-deploy-an-application-to-kubernetes-cluster-using-jenkins-ci-cd-pipeline/
 
 
 ##vim /etc/netplan/00-installer-config.yaml

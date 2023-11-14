@@ -3,12 +3,7 @@ pipeline {
     dockerimagename = "kannarajesh064/eginmusic"
     dockerImage = ""
    }
- agent {
-        docker {
-            image 'jenkins/jnlp-slave'
-        }
-    }
-
+ agent any
  stages {
 
     stage('Checkout Source') {

@@ -1,13 +1,15 @@
 pipeline {
-
-  environment {
+ environment {
     dockerimagename = "kannarajesh064/eginmusic"
     dockerImage = ""
-  }
+   }
+ agent {
+        docker {
+            image 'jenkins/jnlp-slave'
+        }
+    }
 
-  agent any
-
-  stages {
+ stages {
 
     stage('Checkout Source') {
       steps {
@@ -44,5 +46,4 @@ pipeline {
     }
 
   }
-
 }

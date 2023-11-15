@@ -1,9 +1,13 @@
+Hit the player by : https://united-secretly-mongoose.ngrok-free.app/
+
+Reference :
 https://www.jenkins.io/doc/book/installing/kubernetes/#create-a-deployment
 https://sweetcode.io/how-to-deploy-an-application-to-kubernetes-cluster-using-jenkins-ci-cd-pipeline/
 
 
+Kubernetes installation : 
 ##vim /etc/netplan/00-installer-config.yaml
-cat /etc/netplan/00-installer-config.yaml > 00-installer-config.yaml
+cat /etc/netplan/00-installer-config.yaml > System/00-installer-config.yaml
 ##ip a
 ##apt install icmp-tools
 ##apt-get install traceroute

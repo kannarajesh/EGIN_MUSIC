@@ -34,8 +34,11 @@ pipeline {
     }
     stage('Deploying egin_music container to Kubernetes') {
       steps {
-        script {
-          kubernetes Deploy(configs: "eginmusic-deployment.yaml", "egin-svc.yaml")
+	script {
+          sh "kubectl --kubeconfig=/etc/kubernetes/admin.conf get pods"
+          sh "kubectl --kubeconfig=/etc/kubernetes/admin.conf apply -f eginmusic-deployment.yaml"
+          sh "kubectl --kubeconfig=/etc/kubernetes/admin.conf apply -f egin-svc.yaml"
+          sh "kubectl --kubeconfig=/etc/kubernetes/admin.conf get pods"
         }
       }
     }

@@ -15,7 +15,7 @@ spec:
         app: eginmusic
     spec:
       containers:
-        - image: kannarajesh064/eginmusic:latest
+        - image: kannarajesh064/eginmusic:003
           name: eginmusic
           ports:
             - containerPort: 8000

@@ -1,6 +1,6 @@
 pipeline {
  environment {
-    dockerimagename = "kannarajesh064/eginmusic:002"
+    dockerimagename = "kannarajesh064/eginmusic:003"
     dockerImage = ""
    }
  agent any

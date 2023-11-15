@@ -1,6 +1,6 @@
 pipeline {
  environment {
-  BUILD_NUMBER = ${env.BUILD_NUMBER}
+  BUILD_NUMBER = "${env.BUILD_NUMBER}"
   dockerimagename = "kannarajesh064/eginmusic:00${BUILD_NUMBER}"
     dockerImage = ""
    }

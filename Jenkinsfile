@@ -32,10 +32,10 @@ pipeline {
         }
       }
     }
-    stage('Deploying React.js container to Kubernetes') {
+    stage('Deploying egin_music container to Kubernetes') {
       steps {
         script {
-          kubernetesDeploy(configs: "deployment.yaml", "service.yaml")
+          kubernetes Deploy(configs: "eginmusic-deployment.yaml", "egin-svc.yaml")
         }
       }
     }

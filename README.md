@@ -7,7 +7,7 @@ https://sweetcode.io/how-to-deploy-an-application-to-kubernetes-cluster-using-je
 
 Kubernetes installation : 
 ##vim /etc/netplan/00-installer-config.yaml
-cat /etc/netplan/00-installer-config.yaml > System/00-installer-config.yaml
+cat /etc/netplan/00-installer-config.yaml > Server_files/00-installer-config.yaml
 ##ip a
 ##apt install icmp-tools
 ##apt-get install traceroute
@@ -16,11 +16,11 @@ cat /etc/netplan/00-installer-config.yaml > System/00-installer-config.yaml
 ##swapoff -a
 ##free -m
 ##cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
-cat /etc/modules-load.d/k8s.conf > k8s.conf
+cat /etc/modules-load.d/k8s.conf > Server_files/k8s.conf
 ##sudo modprobe overlay
 ##sudo modprobe br_netfilter
 ##cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
-cat /etc/sysctl.d/k8s.conf >> k8s.conf
+cat /etc/sysctl.d/k8s.conf >> Server_files/k8s.conf
 ##net.bridge.bridge-nf-call-iptables  = 1
 ##net.bridge.bridge-nf-call-ip6tables = 1
 ##net.ipv4.ip_forward                 = 1

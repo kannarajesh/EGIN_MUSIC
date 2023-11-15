@@ -1,6 +1,7 @@
 pipeline {
  environment {
-    dockerimagename = "kannarajesh064/eginmusic:003"
+BUILD_NUMBER = env.BUILD_NUMBER ?: '1'    
+dockerimagename = "kannarajesh064/eginmusic:00${BUILD_NUMBER}"
     dockerImage = ""
    }
  agent any
@@ -27,7 +28,7 @@ pipeline {
       steps{
         script {
           docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
-            dockerImage.push("003")
+            dockerImage.push("00${BUILD_NUMBER}")
           }
         }
       }
@@ -36,6 +37,7 @@ pipeline {
       steps {
 	script {
           sh "kubectl --kubeconfig=/var/lib/jenkins/admin.conf get pods"
+          sh "sed s/GIVEMEBUILD__NUMBER/00${BUILD_NUMBER}/g -i eginmusic-deployment.yaml"
           sh "kubectl --kubeconfig=/var/lib/jenkins/admin.conf apply -f eginmusic-deployment.yaml"
           sh "kubectl --kubeconfig=/var/lib/jenkins/admin.conf apply -f egin-svc.yaml"
           sh "kubectl --kubeconfig=/var/lib/jenkins/admin.conf get pods"

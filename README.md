@@ -125,4 +125,4 @@ Jenkins installation:
 
 
 
-
+#docker run -it -e NGROK_AUTHTOKEN=XXXXXXXXXXXXXXXXXXXXXX ngrok/ngrok tunnel --label edge=edghts_ http://localhost:80

@@ -56,7 +56,7 @@ ROOT_URLCONF = 'EGIN.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['/root/EGIN_MUSIC/MUSIC/templates/','/root/EGIN_MUSIC/EGIN/templates/'],
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

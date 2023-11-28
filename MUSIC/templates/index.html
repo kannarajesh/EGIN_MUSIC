@@ -1,16 +1,9 @@
 <!DOCTYPE html>
-{% load static %}
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Egin Music Player</title>
-  <!-- Load FontAwesome icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
-  <!-- Load the custom CSS style file -->
-  <link rel="stylesheet" type="text/css" href="{% static 'music/style.css' %}">
-</head>
-<body>
+{% extends "base.html" %}
+{% block title %}Egin Music Player{% endblock %}
+{% block content %}
+{% if user.is_authenticated %}
+{% csrf_token %}
 <div class="container">
       <div class="p1">
         <h1>
@@ -46,8 +39,11 @@
         var playlist = "{{ playlist }}";
 //	alert(document.title)
   </script>
-  <script src="{% static 'music/main.js' %}"></script>
-
       </div>
     </div>
-    </body>
+{% else %}
+<p>You are not logged in</p>
+<a href="{% url 'login' %}">Log In</a>
+{% endif %}
+{% endblock %}
+

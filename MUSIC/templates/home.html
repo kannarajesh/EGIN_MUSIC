@@ -1,35 +1,26 @@
 <!DOCTYPE html>
-{% load static %}
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EGIN Music Player</title>
-  <!-- Load FontAwesome icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
-  <!-- Load the custom CSS style file -->
-  <link rel="stylesheet" type="text/css" href="{% static 'music/style.css' %}">
-</head>
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+{% if user.is_authenticated %}
+{% csrf_token %}
 <div class="container">
       <div class="p1">
         <h1>
-          Welcome to Music Egin,
-          <span></span>
+          Welcome to Music Egin, {{ user.username }}
         </h1>
-
         <div class="open_pg1">
-          <h2>Tell me what type of songs needed</h2>
+          <h2>what type of songs needed</h2>
         </div>
         <div class="open_pg1_b1">
-          <a href="{{ request.scheme }}://{{ request.get_host }}/MUSIC?play=GYM">
+        <a href="{{ request.scheme }}://{{ request.get_host }}/MUSIC?play=GYM">
 		<div class="open_pg1_b1-1">
             <div class="left">
               <p>Fast Beat Songs</p>
               <h2>GYM</h2>
             </div>
             </div>
-		</a>
-	  
+		</a>	  
            <div class="open_pg1_b2">
           <a href="{{ request.scheme }}://{{ request.get_host }}/MUSIC?play=devotional">
             <div class="open_pg1_b2-1">
@@ -39,10 +30,9 @@
               </div>
                           </div>
 	  </a>
-
             <div class="open_pg1_b3">
           <a href="{{ request.scheme }}://{{ request.get_host }}/MUSIC?play=travel">
-                          <div class="open_pg1_b3-1">
+          <div class="open_pg1_b3-1">
               <div class="left">
                 <p>Mixed</p>
                 <h2>Travel</h2>
@@ -56,7 +46,11 @@
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
         >
-
         </svg>
       </div>
     </div>
+    {% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}">Log In</a>
+{% endif %}
+{% endblock %}

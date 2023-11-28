@@ -70,13 +70,19 @@ span.psw {
 <body>
 
 <h2>Login Form</h2>
-<form method="post">
-  {% csrf_token %}
+
+<form action="/action_page.php" method="post">
   <div class="imgcontainer">
-  <img src="https://images.all-free-download.com/images/graphicwebp/user_tie_icon_flat_silhouette_contrast_black_white_geometry_sketch_6921227.webp" alt="Avatar" class="avatar" >
+    <img src="https://images.all-free-download.com/images/graphicwebp/user_tie_icon_flat_silhouette_contrast_black_white_geometry_sketch_6921227.webp" alt="Avatar" class="avatar" >
   </div>
-  {{ form.as_p }}
+
   <div class="container">
+    <label for="uname"><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" name="uname" required>
+
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" required>
+        
     <button type="submit">Login</button>
     <label>
       <input type="checkbox" checked="checked" name="remember"> Remember me

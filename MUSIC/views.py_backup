@@ -86,9 +86,8 @@ def play_list2(request):
 # Convert the dictionary to JSON
 
 # Print the JSON response
-def play_list_n(request,playlist):
-    url = "https://raw.githubusercontent.com/kannarajesh/EGIN_MUSIC/main/MUSIC/"+playlist+".linklist"
-    print ("url that will be played",url)
+def play_list3(request):
+    url = "https://raw.githubusercontent.com/kannarajesh/EGIN_MUSIC/main/MUSIC/travel.linklist"
     request_host = request.META.get('HTTP_HOST')
     response = requests.get(url)
     data = response.text
@@ -121,10 +120,10 @@ def play_list(request):
     request_host = request.META.get('HTTP_HOST')
     playlist = request.GET.get('play')
     if playlist == "GYM":
-        print("Inside GYM playlist")
-        return play_list_n(request,playlist)
+        print("INside GYM playlist")
+        return play_list2(request)
     elif playlist == "travel":
-        return play_list_n(request,playlist)
+        return play_list3(request)
     else: 
-        return play_list_n(request,playlist)
+        return play_list1(request)
 

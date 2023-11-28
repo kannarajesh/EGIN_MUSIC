@@ -31,10 +31,24 @@ body {
   border-radius: 20px;
 }
 */
+
 .p1 {
   position: relative;
   padding: 20px 20px;
 }
+.btn {
+/*  background-color: gray;*/
+  border: none;
+  color: white;
+  
+  font-size: 40px;
+  cursor: pointer;
+}
+
+/* Darker background on mouse-over */
+.btn:hover {
+/*  background-color: white;*/
+}	
 
 .p1 h1 {
   margin: 20px 10px 0 10px;
